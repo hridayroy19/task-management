@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Authcontext } from './provider/Authprovider';
 
 const Navbar = () => {
+  const { user , logOut} = useContext(Authcontext)
+  console.log(user?.email);
+  const handelSignout =()=>{
+    logOut()
+    .then()
+    .catch()
+  }
     return (
         <div>
             <div className="navbar bg-base-00">
@@ -22,7 +30,7 @@ const Navbar = () => {
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li><a onClick={handelSignout} >Logout</a></li>
       </ul>
     </div>
   </div>

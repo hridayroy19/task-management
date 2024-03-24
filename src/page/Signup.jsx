@@ -1,42 +1,41 @@
-// import { useContext } from "react";
-// import { Authcontext } from "../provider/AuthProvider";
-// import toast from "react-hot-toast";
-// import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { IoMdHome } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Authcontext } from "../components/provider/Authprovider";
+import toast from "react-hot-toast";
 
 
 const SignUp = () => {
 
-//   const {creatUser} = useContext(Authcontext)
-//   const naviget = useNavigate()
-//   const handelSignup = e => {
-//     e.preventDefault()
-//     const from = e.target
-//     const name = from.name.value
-//     const email = from.email.value
-//     const password = from.password.value
+  const {creatUser} = useContext(Authcontext)
+  const naviget = useNavigate()
+  const handelSignup = e => {
+    e.preventDefault()
+    const from = e.target
+    const name = from.name.value
+    const email = from.email.value
+    const password = from.password.value
    
-//     const userInfo ={
-//        name,
-//        email,
-//        password
+    const userInfo ={
+       name,
+       email,
+       password
 
-//     }
+    }
 
-//     console.log(userInfo);
-//     creatUser(email,password)
-//     .then(res => {console.log(res.user)
-//     naviget("/")
-//     return toast.success('Successfully toasted!')
+    console.log(userInfo);
+    creatUser(email,password)
+    .then(res => {console.log(res.user)
+    naviget("/")
+    return toast.success('Successfully toasted!')
 
-//     })
+    })
     
-//     .catch(error =>{
-//       console.log(error);
-//       return toast.error("all ready use please try again ")
-//     })
-//   }
+    .catch(error =>{
+      console.log(error);
+      return toast.error("all ready use please try again ")
+    })
+  }
 
   return (
     <div>
@@ -54,7 +53,7 @@ const SignUp = () => {
           <button className=" absolute text-3xl p-1 text-green-500 border-2  mr-[80%] mb-[30%] rounded-full">  <Link to={"/"}> <IoMdHome/> </Link>  </button>
 
           <div className="shadow-2xl border bg-white rounded-xl mx-3 my-2 w-full md:w-2/5">
-            <form  className="card-body w-full">
+            <form  onSubmit={handelSignup} className="card-body w-full">
               {/* Name input box */}
               <div className="form-control">
                 <label className="label">
