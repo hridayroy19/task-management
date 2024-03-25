@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Authcontext } from './provider/Authprovider';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { user , logOut} = useContext(Authcontext)
-  console.log(user?.email);
+  console.log(user);
   const handelSignout =()=>{
     logOut()
     .then()
@@ -19,7 +20,7 @@ const Navbar = () => {
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
         </div>
       </div>
       <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
@@ -30,7 +31,9 @@ const Navbar = () => {
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a onClick={handelSignout} >Logout</a></li>
+        {
+          user? <li><a onClick={handelSignout} >Logout</a></li> :<li> <Link to={"/login"}> <a>Loin</a> </Link></li>
+        }
       </ul>
     </div>
   </div>

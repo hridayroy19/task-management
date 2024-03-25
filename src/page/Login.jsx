@@ -8,13 +8,13 @@ import { Authcontext } from "../components/provider/Authprovider";
 
 const Login = () => {
 
-const { sigIn , signInWithgoogle, }=useContext(Authcontext)
+const { sigIn , signInWithgoogle }=useContext(Authcontext)
 const navigate = useNavigate();
  const handelLogin = e =>{
     e.preventDefault()
     const from = e.target
     const email = from.email.value
-    const password = from.password.value
+    const password = from.password.value 
 
     console.log(email,password);
 
@@ -37,6 +37,8 @@ const handelGoogleSignWith=()=>{
     signInWithgoogle()
     .then(res=>{
       console.log(res)
+      navigate("/")
+      return toast.success(" success full login ")
   
     })
     .catch(error=>{
