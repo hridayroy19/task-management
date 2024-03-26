@@ -30,7 +30,7 @@ const Add = () => {
         console.log(addTask);
         try {
             // Send the task data 
-            const response = await axiosPublic.post('/task', addTask);
+            const response = await axiosPublic.post('/alltask', addTask);
             console.log(response.data);
             toast.success("succesfully data added")
            navigate("/")

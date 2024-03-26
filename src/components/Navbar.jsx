@@ -14,7 +14,7 @@ const Navbar = () => {
         <div>
             <div className="navbar bg-base-00">
   <div className="flex-1">
-    <a className="text-green-600 font-medium text-xl">Task Managemant</a>
+  <Link to={"/"} > <a className="text-green-600 font-medium text-xl">Task Managemant</a> </Link>
   </div>
   <div className="flex-none gap-2">
     <div className="dropdown dropdown-end">

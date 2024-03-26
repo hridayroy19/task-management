@@ -5,8 +5,33 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { MdOutlineLocalPhone } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
+import useAxiosPublic from "./hooks/axiosPublic/AxiosPublic";
+import { Authcontext } from "./provider/Authprovider";
 
 const Profile = () => {
+const axiosPublic = useAxiosPublic()
+const { user} = useContext(Authcontext)
+const [userData, setUserData] = useState(null); 
+// console.log(userData);
+
+  
+useEffect(() => {
+  const fetchUserData = async () => {
+    try {
+      const response = await axiosPublic.get(`/user?email=${user?.email}`);
+      const data = response.data; 
+      setUserData(data); 
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  if (user?.email) {
+    fetchUserData();
+  }
+}, [axiosPublic, user]);
+
+// console.log(userData);
 
   return (
     <>
@@ -20,7 +45,7 @@ const Profile = () => {
       <div className="lg:flex  xl:flex md:flex flex-row cursor-pointer gap-5  mb-5 px-7  justify-center ">
 
         <div className=" w-[300px]  relative ">
-          <img src="https://i.ibb.co/HpkpkSh/c29525367f90c3832119297e149102ed.jpg" alt="" className="w-full  h-[370px] object-cover   " />
+          <img src={ userData?.photo} alt="" className="w-full  h-[370px] object-cover   " />
 
           <div className="xl:bottom-[150px] lg:bottom-[170px] absolute md:bottom-[150px] bottom-[170px]  ml-8 text-xl  ">
             <a href="https://www.facebook.com"><p className="mt-4 mb-3  bg-yellow-300 hover:bg-yellow-600 p-1 py-2 "> <FaFacebook className="rounded-full  "></FaFacebook> </p></a>
@@ -34,7 +59,7 @@ const Profile = () => {
         <div className=" flex justify-center">
         <div className=" w-[500px]  px-6 bg-gray-200 lg:mt-0 md:mt-0 mt-5">
           <div className="">
-            <h1 className="text-2xl font-bold "> hridoy</h1>
+            <h1 className="text-2xl font-bold ">  { userData?.name} </h1>
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
               <div className="modal-box">
                 <div className=" px-4 py-3 rounded-md ">
@@ -103,13 +128,12 @@ const Profile = () => {
               </div>
             </dialog>
           </div>
-          <p className="text-[20px] font-semibold mt-5"> .description</p>
           <h1 className=" text-2xl  font-bold my-5 "> Contact Information</h1>
 
           <div className="xl:flex lg:flex flex-row gap-7 md:flex-row mt-2">
             <div className=" flex xl:flex-row flex-col  gap-4">
-              <p className=" flex items-center gap-3"> < MdOutlineMailOutline></MdOutlineMailOutline> .email </p>
-              <p className=" flex gap-1 items-center"> <MdOutlineLocalPhone></MdOutlineLocalPhone>entphone</p>
+              <p className=" flex items-center gap-3"> < MdOutlineMailOutline></MdOutlineMailOutline> { userData?.email} </p>
+              <p className=" flex gap-1 items-center"> <MdOutlineLocalPhone></MdOutlineLocalPhone></p>
             </div>
 
           </div>

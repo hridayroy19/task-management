@@ -15,41 +15,14 @@ const SignUp = () => {
     e.preventDefault()
     const from = e.target
     const name = from.name.value
+    const photo = from.photo.value
     const email = from.email.value
     const password = from.password.value
-
-    // const userInfo = {
-    //   name,
-    //   email,
-    //   password
-
-    // }
-    // console.log(userInfo);
-  //   creatUser(email, password)
-  //     .then(() => {
-  //       // send database information
-  //       const Userdata = {
-  //         name,
-  //         email,
-  //         password
-  //       }
-  //       axiosPublic.post('/user', Userdata)
-  //       naviget("/")
-  //       return toast.success('Successfully toasted!')
-
-  //     })
-
-  //     .catch(error => {
-  //       console.log(error);
-  //       return toast.error("all ready use please try again ")
-  //     })
-
-
- // Create user locally
  const userInfo = {
   name,
   email,
-  password
+  password,
+  photo
 };
 
 console.log(userInfo);
@@ -61,10 +34,11 @@ creatUser(email, password)
     const userData = {
       name,
       email,
+      photo,
       password
     };
 
-    axiosPublic.post('/user', userData)
+    axiosPublic.post('/alluser', userData)
     naviget("/")
     return toast.success('Successfully toasted!')
    .catch(error => {
@@ -101,6 +75,16 @@ creatUser(email, password)
                   type="text"
                   name="name"
                   placeholder="Your Name"
+                  className="input input-bordered" />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">PhotoUrl</span>
+                </label>
+                <input
+                  type="text"
+                  name="photo"
+                  placeholder="Photo Url"
                   className="input input-bordered" />
               </div>
 
