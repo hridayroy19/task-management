@@ -29,7 +29,6 @@ const Navbar = () => {
             Profile
           </a></Link>
         </li>
-        <li><a>Settings</a></li>
         {
           user? <li><a onClick={handelSignout} >Logout</a></li> :<li> <Link to={"/login"}> <a>Loin</a> </Link></li>
         }

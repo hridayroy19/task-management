@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useContext, } from 'react';
+import { Authcontext } from './provider/Authprovider';
+import useAxiosPublic from './hooks/axiosPublic/AxiosPublic';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
 
 const Add = () => {
-    const handelAdd = e =>{
+
+  const { user}= useContext(Authcontext)
+  console.log(user?.email);
+  const axiosPublic = useAxiosPublic()
+ const navigate = useNavigate()
+
+    const handelAdd = async (e) =>{
         e.preventDefault()
         const from = e.target
         const title = from.title.value
@@ -10,8 +21,27 @@ const Add = () => {
         const assign = from.assign.value
         const priority = from.priority.value
         const  status = from. status.value
-        console.log(title,description,deadline,assign,priority, status);
+        const addTask = {
+            title,description,
+            deadline,assign,
+            priority, status ,           
+            email:user?.email
+        }
+        console.log(addTask);
+        try {
+            // Send the task data 
+            const response = await axiosPublic.post('/task', addTask);
+            console.log(response.data);
+            toast.success("succesfully data added")
+           navigate("/")
+             
+          } catch (error) {
+            console.error(error);
+          }
     }
+
+
+
     return (
         <div>
             <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">

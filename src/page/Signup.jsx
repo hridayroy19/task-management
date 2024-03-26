@@ -3,11 +3,13 @@ import { IoMdHome } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { Authcontext } from "../components/provider/Authprovider";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../components/hooks/axiosPublic/AxiosPublic";
 
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic()
 
-  const {creatUser} = useContext(Authcontext)
+  const { creatUser } = useContext(Authcontext)
   const naviget = useNavigate()
   const handelSignup = e => {
     e.preventDefault()
@@ -15,36 +17,70 @@ const SignUp = () => {
     const name = from.name.value
     const email = from.email.value
     const password = from.password.value
-   
-    const userInfo ={
-       name,
-       email,
-       password
 
-    }
+    // const userInfo = {
+    //   name,
+    //   email,
+    //   password
 
-    console.log(userInfo);
-    creatUser(email,password)
-    .then(res => {console.log(res.user)
+    // }
+    // console.log(userInfo);
+  //   creatUser(email, password)
+  //     .then(() => {
+  //       // send database information
+  //       const Userdata = {
+  //         name,
+  //         email,
+  //         password
+  //       }
+  //       axiosPublic.post('/user', Userdata)
+  //       naviget("/")
+  //       return toast.success('Successfully toasted!')
+
+  //     })
+
+  //     .catch(error => {
+  //       console.log(error);
+  //       return toast.error("all ready use please try again ")
+  //     })
+
+
+ // Create user locally
+ const userInfo = {
+  name,
+  email,
+  password
+};
+
+console.log(userInfo);
+
+// Call createUser function and handle the promise
+creatUser(email, password)
+  .then(() => {
+    // Send user data to the database
+    const userData = {
+      name,
+      email,
+      password
+    };
+
+    axiosPublic.post('/user', userData)
     naviget("/")
     return toast.success('Successfully toasted!')
+   .catch(error => {
+          console.log(error);
+          return toast.error("all ready use please try again ")
+        })
+  })
+};
 
-    })
-    
-    .catch(error =>{
-      console.log(error);
-      return toast.error("all ready use please try again ")
-    })
-  }
-
-  
 
   return (
     <div>
       <div className="hero h-fit py-16">
-   
+
         <div className=" flex items-center flex-wrap md:w-full justify-around">
-       
+
           <div className=" relative w-full mx-5 text-center md:w-2/5">
             <img
               className=" "
@@ -52,10 +88,10 @@ const SignUp = () => {
               alt=""
             />
           </div>
-          <button className=" absolute text-3xl p-1 text-green-500 border-2  mr-[80%] mb-[30%] rounded-full">  <Link to={"/"}> <IoMdHome/> </Link>  </button>
+          <button className=" absolute text-3xl p-1 text-green-500 border-2  mr-[80%] mb-[30%] rounded-full">  <Link to={"/"}> <IoMdHome /> </Link>  </button>
 
           <div className="shadow-2xl border bg-white rounded-xl mx-3 my-2 w-full md:w-2/5">
-            <form  onSubmit={handelSignup} className="card-body w-full">
+            <form onSubmit={handelSignup} className="card-body w-full">
               {/* Name input box */}
               <div className="form-control">
                 <label className="label">
@@ -95,7 +131,7 @@ const SignUp = () => {
               </div>
               {/* SignUp button  */}
               <div className="form-control mt-6">
-                <button type="submit"  className={`btn bg-green-600 disabled:text-slate-600 hover:bg-orange-500 border-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60`}>
+                <button type="submit" className={`btn bg-green-600 disabled:text-slate-600 hover:bg-orange-500 border-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60`}>
                   Sign up
                 </button>
               </div>
