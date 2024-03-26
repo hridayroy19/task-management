@@ -14,7 +14,7 @@ const Navbar = () => {
         <div>
             <div className="navbar bg-base-00">
   <div className="flex-1">
-    <a className="btn btn-ghost text-xl">Task Managemant</a>
+    <a className="text-green-600 font-medium text-xl">Task Managemant</a>
   </div>
   <div className="flex-none gap-2">
     <div className="dropdown dropdown-end">
@@ -25,10 +25,9 @@ const Navbar = () => {
       </div>
       <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
         <li>
-          <a className="justify-between">
+          <Link to={"/profile"}> <a className="justify-between">
             Profile
-            <span className="badge">New</span>
-          </a>
+          </a></Link>
         </li>
         <li><a>Settings</a></li>
         {

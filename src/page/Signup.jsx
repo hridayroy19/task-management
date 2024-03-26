@@ -37,6 +37,8 @@ const SignUp = () => {
     })
   }
 
+  
+
   return (
     <div>
       <div className="hero h-fit py-16">

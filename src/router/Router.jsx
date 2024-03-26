@@ -3,27 +3,33 @@ import Home from "../page/Home";
 import MainLout from "../laout/MainLout";
 import SignUp from "../page/Signup";
 import Login from "../page/Login";
+import Profile from "../components/profile";
 
 
 
 
 const Router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <MainLout></MainLout>,
+    children: [{
       path: "/",
-      element: <MainLout></MainLout>,
-      children:[{
-        path:"/",
-        element:<Home></Home>
-      }]
-    },
+      element: <Home></Home>
+    } ,
     {
-      path:"/login",
-      element:<Login></Login>
-    },
-    {
-      path:"/signup",
-      element:<SignUp></SignUp>
-    }
-  ]);
+      path:"/profile",
+      element:<Profile></Profile>
+
+    }]
+  },
+  {
+    path: "/login",
+    element: <Login></Login>
+  },
+  {
+    path: "/signup",
+    element: <SignUp></SignUp>
+  }
+]);
 
 export default Router;

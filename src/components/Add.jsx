@@ -15,7 +15,7 @@ const Add = () => {
     return (
         <div>
             <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
-                <div className="modal-box bg-gray-200">
+                <div className="modal-box bg-[#e4e6e3]">
                     <div className="flex justify-between px-3 ">
                         <p></p>
                         <form method="dialog">
@@ -97,9 +97,11 @@ const Add = () => {
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary ">
+                       <div className=' flex justify-end'>
+                       <button type="submit" className="bg-green-600 px-4 py-1 sm:px-6 sm:py-3 rounded-lg text-white text-sm sm:text-base">
                             Submit
                         </button>
+                       </div>
                     </form>
                 </div>
             </dialog>
