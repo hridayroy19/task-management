@@ -15,9 +15,7 @@ const navigate = useNavigate();
     const from = e.target
     const email = from.email.value
     const password = from.password.value 
-
     console.log(email,password);
-
     sigIn(email,password)
     .then(res =>{ console.log(res.user)
     navigate("/")
@@ -46,8 +44,6 @@ const handelGoogleSignWith=()=>{
     
     })
 }
-
-
 
     return (
 
