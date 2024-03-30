@@ -4,11 +4,10 @@ import useAxiosPublic from './hooks/axiosPublic/AxiosPublic';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-
 const Add = () => {
 
   const { user}= useContext(Authcontext)
-  console.log(user?.email);
+//   console.log(user?.email);
   const axiosPublic = useAxiosPublic()
  const navigate = useNavigate()
 
@@ -75,12 +74,12 @@ const Add = () => {
                                 name="description"
                             />
                         </div>
-                        <div className="flex flex-col mb-5">
+                        <div className=" hidden flex-col mb-5">
                             <label htmlFor="title" className="mb-2">
                                 Deadline
                             </label>
                             <input
-                                className="w-full px-2 py-1 rounded-md"
+                                className="w-full px-2  py-1 rounded-md"
                                 type="date"
                                 name="deadline"
                             />
@@ -111,20 +110,21 @@ const Add = () => {
                                     <option value="P2" > P2</option>
                                 </select>
                             </div>
-                            <div className="flex flex-col mb-5">
+                            <div className=" hidden flex-col mb-5">
                                 <label htmlFor="title" className="mb-2">
                                     Status
                                 </label>
-                                <select
+                                <input type="text" name='status' value={"Pending"} />
+                                {/* <select
                                     className="w-full px-1 rounded-md"
                                     name="status"
                                 >
-                                    <option value="Assign"> Assign </option>
+                                    <option value="Assign"> Panding </option>
                                     <option value="InProgress"> In Progress </option>
                                     <option value="Completed"> Completed </option>
                                     <option value="Deployed"> Deployed </option>
                                     <option value="Deferred"> Deferred </option>
-                                </select>
+                                </select> */}
                             </div>
                         </div>
                        <div className=' flex justify-end'>

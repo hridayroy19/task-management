@@ -1,10 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Authcontext } from './provider/Authprovider';
 import { Link } from 'react-router-dom';
+import useAxiosPublic from './hooks/axiosPublic/AxiosPublic';
 
 const Navbar = () => {
   const { user , logOut} = useContext(Authcontext)
-  console.log(user);
+  // console.log(user);
+  const [userData, setUserData] = useState(null); 
+  // console.log(userData.image);
+  const axiosPublic = useAxiosPublic()
+
+  
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axiosPublic.get(`/user?email=${user?.email}`);
+        const data = response.data; 
+        setUserData(data); 
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+  
+    if (user?.email) {
+      fetchUserData();
+    }
+  }, [axiosPublic, user]);
+
   const handelSignout =()=>{
     logOut()
     .then()
@@ -20,7 +42,7 @@ const Navbar = () => {
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+          <img alt="Tailwind CSS Navbar component" src={userData?.photo} />
         </div>
       </div>
       <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">

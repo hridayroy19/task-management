@@ -3,12 +3,13 @@ import useAxiosPublic from "./hooks/axiosPublic/AxiosPublic";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Authcontext } from "./provider/Authprovider";
 import toast from "react-hot-toast";
+import Update from "./Update";
 
 const Card = () => {
   const { user } = useContext(Authcontext);
   const axiosPublic = useAxiosPublic();
   const [taskData, setTaskData] = useState(null);
-  console.log(taskData);
+  // console.log(taskData);
 
   useEffect(() => {
     const fetchTaskData = async () => {
@@ -29,11 +30,11 @@ const Card = () => {
   //   delet card
 
   const handelDelete = (id) => {
-    console.log("Deleting task with ID:", id);
+    // console.log("Deleting task with ID:", id);
     axiosPublic
       .delete(`/alltasks/${id}`)
       .then((response) => {
-        console.log("Task deletion successful:", response.data);
+        toast.success("Task deletion successful");
       })
       .catch((error) => {
         console.error("Error deleting task:", error);
@@ -71,9 +72,16 @@ const Card = () => {
                   <ul
                     tabIndex={0}
                     className="mt-3 z-[1] p-1 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-28"
-                  >
+                  >   
                     <li>
-                      <a>Edit</a>
+                      {/* <button onClick={() => document.getElementById('my_modal_5').showModal()} className="bg-green-600 px-6 py-2 rounded-full">Add new task</button> */}
+                      <a
+                        onClick={() =>
+                          document.getElementById("my_modal_7").showModal()
+                        }>
+                        Edit
+                      </a>
+                      <Update></Update>
                     </li>
                     <li>
                       <a onClick={() => handelDelete(task._id)}>Delet</a>
@@ -92,7 +100,7 @@ const Card = () => {
   };
 
   const dataListing = [
-    "Assign",
+    "Pending",
     "InProgress",
     "Completed",
     "Deployed",
