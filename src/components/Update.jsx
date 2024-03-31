@@ -1,16 +1,48 @@
-import React, { useContext } from "react";
+// import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import useAxiosPublic from "./hooks/axiosPublic/AxiosPublic";
 
-const Update = () => {
+const Update = ({task}) => {
+    console.log(task);
+
+const axiosPublic = useAxiosPublic()
+  // const handelAdd = async (e) => {
+  //   e.preventDefault();
+  //   const from = e.target;
+  //   const title = from.title.value;
+  //   const description = from.description.value;
+  //   const deadline = from.deadline.value;
+  //   const assign = from.assign.value;
+  //   const priority = from.priority.value;
+  //   const status = from.status.value;
+  //   const updatedTask = {
+  //     title,
+  //     description,
+  //     deadline,
+  //     assign,
+  //     priority,
+  //     status,
+  //   };
+  //   console.log(updatedTask);
+  //   try {
+  //     const response = await axiosPublic.patch(`/updateData/${task?._id}`, updatedTask);
+  //     console.log(response.data);
+  //     toast.success("Task updated successfully");
+  //   } catch (error) {
+  //     console.error("Error updating task:", error.message);
+  //     toast.error("Failed to update task");
+  //   }
+  // };
   const handelAdd = async (e) => {
     e.preventDefault();
-    const from = e.target;
-    const title = from.title.value;
-    const description = from.description.value;
-    const deadline = from.deadline.value;
-    const assign = from.assign.value;
-    const priority = from.priority.value;
-    const status = from.status.value;
-    const addTask = {
+    const form = e.target;
+    const title = form.title.value;
+    const description = form.description.value;
+    const deadline = form.deadline.value;
+    const assign = form.assign.value;
+    const priority = form.priority.value;
+    const status = form.status.value;
+    const updatedTask = {
       title,
       description,
       deadline,
@@ -18,15 +50,26 @@ const Update = () => {
       priority,
       status,
     };
-    console.log(addTask);
+    console.log(updatedTask);
+    try {
+      const response = await axiosPublic.patch(`/updateData/${task?._id}`, updatedTask);
+      console.log(response.data);
+      console.log(updatedTask);
+      toast.success("Task updated successfully");
+    } catch (error) {
+      console.error("Error updating task:", error.message);
+      toast.error("Failed to update task");
+    }
   };
+  
+
 
   return (
     <div>
-      <dialog id="my_modal_7" className="modal modal-middle sm:modal-middle">
+      <dialog  id="my_modal_7" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box bg-[#e4e6e3]">
           <div className="flex justify-between px-3 ">
-            <p></p>
+     
             <form method="dialog">
               <button className="btn btn-circle">
                 <svg
@@ -46,6 +89,7 @@ const Update = () => {
               </button>
             </form>
           </div>
+          
           <form onSubmit={handelAdd}>
             <div className="flex flex-col mb-5">
               <label className="mb-2">Titles</label>
@@ -53,6 +97,7 @@ const Update = () => {
                 className="w-full px-2 py-2 rounded-md"
                 type="text"
                 name="title"
+                defaultValue={task?.title}
               />
             </div>
             <div className="flex flex-col mb-5">
@@ -61,7 +106,10 @@ const Update = () => {
                 className="w-full px-2 py-2 rounded-md"
                 type="text"
                 name="description"
+                defaultValue={task?.description}
               />
+            </div>
+            <div>         
             </div>
             <div className=" flex  flex-col mb-5">
               <label htmlFor="title" className="mb-2">
@@ -82,18 +130,19 @@ const Update = () => {
                 type="text"
                 name="assign"
               />
-            </div>
+            </div>       
             <div className="flex justify-between mt-3 mb-2">
               <div className="flex flex-col mb-5">
                 <label htmlFor="title" className="mb-2">
                   Priority
                 </label>
-                <select className="w-full px-1 rounded-md" name="priority">
-                  <option defaultValue value="P0">
+                <select className="w-full px-1  rounded-md" name="priority">
+                  <option defaultValue={task?.priority} value="P0">
                     P0
                   </option>
                   <option value="P1">P1</option>
                   <option value="P2"> P2</option>
+                  
                 </select>
               </div>
               <div className=" flex flex-col mb-5">
@@ -117,7 +166,9 @@ const Update = () => {
                 update
               </button>
             </div>
-          </form>
+          </form> 
+        
+         
         </div>
       </dialog>
     </div>

@@ -10,6 +10,8 @@ const Card = () => {
   const axiosPublic = useAxiosPublic();
   const [taskData, setTaskData] = useState(null);
   // console.log(taskData);
+  const [editTask,setEditTask] = useState()
+
 
   useEffect(() => {
     const fetchTaskData = async () => {
@@ -47,13 +49,13 @@ const Card = () => {
     // console.log(filteredTasks);
     return (
       <div key={status}>
-        <h3 className="text-center p-1 mb-4 bg-green-400 rounded-xl">
+        <h3 className="text-center  p-1 mb-4 bg-green-400 rounded-xl">
           {status}
         </h3>
         {filteredTasks?.map((task) => (
           <div
             key={task._id}
-            className="border-2 px-3 rounded-2xl h-auto w-[220px] py-2"
+            className="border-2 px-3 mb-2 rounded-2xl h-auto w-[220px] py-2"
           >
             <div className="bg-gray-300 px-4 py-3 rounded-lg">
               <h4 className="font-semibold flex justify-between items-center">
@@ -73,15 +75,14 @@ const Card = () => {
                     tabIndex={0}
                     className="mt-3 z-[1] p-1 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-28"
                   >   
-                    <li>
+                    <li onClick={() => setEditTask(task)}>
                       {/* <button onClick={() => document.getElementById('my_modal_5').showModal()} className="bg-green-600 px-6 py-2 rounded-full">Add new task</button> */}
-                      <a
-                        onClick={() =>
-                          document.getElementById("my_modal_7").showModal()
-                        }>
+                      <a  
+                        className="btn" onClick={()=>document.getElementById('my_modal_7').showModal()}
+                        >
                         Edit
                       </a>
-                      <Update></Update>
+                      <Update task={task} ></Update>
                     </li>
                     <li>
                       <a onClick={() => handelDelete(task._id)}>Delet</a>
