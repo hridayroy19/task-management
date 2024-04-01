@@ -48,16 +48,16 @@ const Card = () => {
     const filteredTasks = taskData.filter((task) => task.status === status);
     // console.log(filteredTasks);
     return (
-      <div key={status}>
-        <h3 className="text-center  p-1 mb-4 bg-green-400 rounded-xl">
+      <div key={status} className="" >
+        <h3 className="text-center  w-[230px] m-2 p-1 mb-4 bg-green-400 rounded-xl">
           {status}
         </h3>
         {filteredTasks?.map((task) => (
           <div
             key={task._id}
-            className="border-2 px-3 mb-2 rounded-2xl h-auto w-[220px] py-2"
+            className="border-2 px-3 mb-2 rounded-2xl h-auto w-[230px] py-2"
           >
-            <div className="bg-gray-300 px-4 py-3 rounded-lg">
+            <div className="bg-gray-300 px-3 py-3 rounded-lg">
               <h4 className="font-semibold flex justify-between items-center">
                 {task.title} <span>{task.priority}</span>
               </h4>
@@ -110,7 +110,7 @@ const Card = () => {
 
   return (
     <div className="mt-12">
-      <div className="grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-2 grid-cols-1 w-full mx-auto justify-between gap-5">
+      <div className="grid  xl:grid-cols-5 lg:grid-flow-col md:grid-flow-col  grid-cols-none grid-flow-col overflow-x-auto gap-5">
         {dataListing.map((status) => taskStatus(status))}
       </div>
     </div>

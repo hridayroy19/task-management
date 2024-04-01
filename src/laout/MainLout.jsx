@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 
 const MainLout = () => {
     return (
-        <div className="px-14">
+        <div className="px-10">
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Toaster/>
